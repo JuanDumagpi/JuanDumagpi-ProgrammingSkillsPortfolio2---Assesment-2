@@ -15,6 +15,7 @@ apiURL = "https://pokeapi.co/api/v2"
 
 #Takes ONLY the first 151 pokemon from the first generation
 namesURL = "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
+
 # url = f"{apiURL}/pokemon/{name}"
 apiResponse = requests.get(apiURL)
 nameResponse = requests.get(namesURL)
@@ -60,6 +61,9 @@ def changeColor():
     labelImage.configure(highlightbackground=secondaryColor)
     infoFrame.configure(highlightbackground=primaryColor)
     labelTyping1.configure(bg=primaryColor)
+    listbox.configure(bg=primaryColor, selectbackground=secondaryColor)
+    buttonFrame.configure(highlightbackground=primaryColor)
+    selectButton.configure(bg=secondaryColor)
     if len(typing) == 2:
         labelTyping2.configure(bg=secondaryColor)
     else:
@@ -91,7 +95,7 @@ root.configure(bg="#357EC7")
 root.geometry("800x600")
 
 #Makes a listbox of all the pokemon from Generation 1-------------
-listbox = Listbox(root)
+listbox = Listbox(root, borderwidth=0, bg=primaryColor, selectbackground=secondaryColor, fg="white")
 listbox.grid (column=0, row=3, pady=15, padx=15)
 nameList = []
 for k in data:
@@ -116,19 +120,19 @@ labelImage.grid(column=0, row=0)
 
 
 #Info Labels-------------------------------------------------------------------
-infoFrame = Frame (root, padx=15, pady=15, highlightthickness=4, highlightbackground=primaryColor)
+infoFrame = Frame (root, padx=15, pady=15, highlightthickness=8, highlightbackground=primaryColor)
 infoFrame.grid(column=1, row=0, rowspan=5)
 
 if len(typing) == 2:
     labelTyping1 = Label(root, text=typing[0], fg="white", bg=primaryColor)
     labelTyping2 = Label(root, text=typing[1], fg="white", bg=secondaryColor)
     labelTyping1.grid(column=0, row=1)
-    labelTyping2.grid(column=0, row=2)
+    labelTyping2.grid(column=0, row=2, pady=5)
 else:
     labelTyping1 = Label(root, text=typint[0])
     labelTyping2 = Label(root, text="")
     labelTyping1.grid(column=0, row=1)
-    labelTyping2.grid(column=0, row=2)
+    labelTyping2.grid(column=0, row=2, pady=5)
 
 labelID = Label(infoFrame, text=f"{pokemon_info["id"]}")
 labelID.grid(column=0, row=0)
@@ -215,9 +219,11 @@ def changeInfo():
         labelAV3.configure(text=abilities[2].capitalize())
     except:
         labelAV3.configure(text=abilities[2].capitalize())
-        
-selectButton = Button (root, text = "Select Pokemon", command=changeInfo)
-selectButton.grid (column=0, row=5, pady=15, padx=15)
+
+buttonFrame = LabelFrame(root, highlightthickness=8, highlightbackground=primaryColor)
+buttonFrame.grid(column=0, row=5, pady=15, padx=15)        
+selectButton = Button (buttonFrame, text = "Select Pokemon", command=changeInfo, bg=secondaryColor, fg="white")
+selectButton.pack()
 #------------------------------------------------------------------------------
 
 
