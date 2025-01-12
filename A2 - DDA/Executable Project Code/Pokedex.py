@@ -294,10 +294,10 @@ def changeInfo():
     except:
         labelAV3.configure(text="".capitalize())
     labelStatHPVal.configure(text=pokeStats[0])
-    labelStatAtkValVal.configure(text=pokeStats[1])
-    labelStatDefValVal.configure(text=pokeStats[2])
-    labelStatSpAValVal.configure(text=pokeStats[3])
-    labelStatSpDValVal.configure(text=pokeStats[4])
+    labelStatAtkVal.configure(text=pokeStats[1])
+    labelStatDefVal.configure(text=pokeStats[2])
+    labelStatSpAVal.configure(text=pokeStats[3])
+    labelStatSpDVal.configure(text=pokeStats[4])
     labelStatSpeVal.configure(text=pokeStats[5])
 
 
